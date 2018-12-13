@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	</title>
+</head>
+<body>
+    <input type="text" name="username" id='username'>
+    <input type="text" name="password"  id='password'>
+    <button  id="btn">ajax 测试</button>
+
+     <button  id="btn2">fetch 测试</button>
+     <a  id='aaa'></a>
+</body> 
+<script type="text/javascript"  src="/static/js/jquery.min.js"></script>
+<script type="text/javascript">
+   $('document').ready(function(){
+
+           $('#btn').click(function(){
+
+                  var username=$('#username').val()
+                  var password=$('#password').val()
+
+                  $.ajax({    
+                    type:"post",    
+                    url:"/login/",    
+	                data:{username:username,password:password},
+	                dataType: "json", 
+                    success:function(mess){    
+                    	console.log(typeof mess)
+                    	console.log(mess)
+                        $("#aaa").text(mess);//获取成功以后输出返回值    
+                    }    
+                });    
+           
+
+
+           })
+
+
+           $('#btn2').click(function(){
+                 var username=$('#username').val()
+                  var password=$('#password').val()
+                
+                  
+				    var opts = {
+				        method:"POST",   //请求方法
+				        body:{username:username,password:password},   //请求体
+				　　　　　headers: {
+				   　　　　 'Accept': 'application/json',
+				   　　　　 'Content-Type': 'application/json',
+				 　　　　 },
+
+				    }
+
+				    fetch('/testfetch/',opts)
+				        .then(response => {
+				        	console.log(response)
+				        })
+						  .then(data => {
+						    // data就是我们请求的repos
+						    console.log(data)
+						  });
+
+
+           })
+
+   })
+
+
+</script>
+</html>
