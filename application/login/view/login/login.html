@@ -29,7 +29,18 @@
                     success:function(mess){    
                     	console.log(typeof mess)
                     	console.log(mess)
-                        $("#aaa").text(mess);//获取成功以后输出返回值    
+                        if(mess=='yes'){
+
+                            console.log('登录成功')
+                            window.location.href='http://www.notebook.org/loginsuccess';
+                        }
+
+
+                        else{
+                            console.log('登录失败');
+                            window.location.href='http://www.notebook.org/login';
+                        }
+
                     }    
                 });    
            

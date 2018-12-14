@@ -12,7 +12,7 @@ class Test extends Controller
         //     'email' => 'thinkphp@qq.com'
         // ]);
         // 模板输出
-        return view('login/login');
+        return view('homepage/homepage');
     }
      
 

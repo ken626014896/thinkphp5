@@ -12,7 +12,13 @@ use think\Route;
 // 注册路由到index模块的News控制器的read操作
 Route::rule('','homepage/Homepage/homepage');
 Route::rule('test/:id','homepage/Test/getnum');
+
+Route::rule('loginsuccess','login/Login/loginsuccess');
 Route::rule('login','login/Login/login');
+Route::rule('logout','login/Login/logout');
+
+
+
 Route::rule('testfetch','login/Login/sendtofetch');
 
 
