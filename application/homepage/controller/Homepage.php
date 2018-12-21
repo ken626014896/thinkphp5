@@ -28,7 +28,7 @@ class Homepage  extends Controller
 		}
 
         dump($this->send_post());
-        dump($this->translation());
+
        $name=Session::get('islogin');
        $this->assign([
             'name'  =>  $name,

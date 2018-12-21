@@ -36,5 +36,12 @@ return [
         'model'      => ['User'],
         'view'       => ['login/login'],
     ],
+    'adminpage'     => [
+        '__file__'   => ['common.php'],
+        '__dir__'    => ['behavior', 'controller', 'model', 'view'],
+        'controller' => ['Manage', ],
+        'model'      => ['User'],
+        'view'       => ['adminpage/adminpage'],
+    ],
     // 其他更多的模块定义
 ];
