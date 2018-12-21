@@ -23,12 +23,9 @@ Route::rule('testfetch','login/Login/sendtofetch');
 
 
 return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
+
+        ':id'   => ['index/Index/index', ['method' => 'get'], ['id' => '\d+']],
+
+
 
 ];
