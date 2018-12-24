@@ -27,7 +27,7 @@ class Homepage  extends Controller
 
 		}
 
-        dump($this->send_post());
+//        dump($this->send_post());
 
        $name=Session::get('islogin');
        $this->assign([
@@ -59,8 +59,11 @@ class Homepage  extends Controller
     );
     $context = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
-
-    return $result;
+    $res=json_decode($result,true);
+    $responseInfo = $http_response_header;
+    $res=substr($responseInfo[4],strpos($responseInfo[4],'=')+1);
+    $res=substr($res,0,strpos($res, '; '));
+    return $res;
 }
 
 }

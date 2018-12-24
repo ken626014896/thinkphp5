@@ -16,10 +16,12 @@ Route::rule('test/:id','homepage/Test/getnum');
 Route::rule('loginsuccess','login/Login/loginsuccess');
 Route::rule('login','login/Login/login');
 Route::rule('logout','login/Login/logout');
-
-
-
 Route::rule('testfetch','login/Login/sendtofetch');
+
+
+Route::rule('adminlogin','adminpage/Login/login');
+Route::rule('index','adminpage/Index/index');
+Route::rule('commodity_list','adminpage/Index/post');
 
 
 return [
