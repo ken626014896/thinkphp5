@@ -22,7 +22,7 @@ Route::rule('testfetch','login/Login/sendtofetch');
 Route::rule('adminlogin','adminpage/Login/login');
 Route::rule('index','adminpage/Index/index');
 Route::rule('commodity_list','adminpage/Index/post');
-
+Route::rule('comment_list','adminpage/Index/comment');
 
 return [
 
