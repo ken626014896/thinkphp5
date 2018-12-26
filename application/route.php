@@ -24,4 +24,4 @@ Route::rule('index','adminpage/Index/index');
 Route::rule('commodity_list','adminpage/Index/post');
 Route::rule('comment_list/','adminpage/Index/comment');
 Route::rule('add_commodity/','adminpage/Index/add_commodity');
-
+Route::rule('upload_img/','adminpage/Index/upload');

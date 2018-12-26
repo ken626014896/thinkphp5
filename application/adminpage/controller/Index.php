@@ -147,7 +147,7 @@ class Index extends  Controller
 
         $content = curl_exec($ch);
 
-        curl_close($ch);//关闭会话
+        curl_close($ch);
 
         return   $content ;
 
@@ -166,6 +166,53 @@ class Index extends  Controller
 
 
 
+    }
+    public  function upload(){
+
+
+        $file = $_FILES["img_obj"];
+        move_uploaded_file($file['tmp_name'], $file["name"]);
+
+
+        $this->init();
+        $url='http://119.23.44.138:10001/image/add';
+
+
+        $cookies='beegosessionID='.$this->cookies.'; Path=/; HttpOnly';
+
+
+        $ch =curl_init();
+
+        $header[] = "Content-type:multipart/form-data";
+        curl_setopt($ch, CURLOPT_POST, 1);
+        //设置post数据
+
+        $post= array("upload_file"=>"");
+//        $sabsolute_path=getcwd();
+//        $sabsolute_path=strtr($sabsolute_path, '\\', '/');
+//        $path=$sabsolute_path.'/'.$file['name'];
+
+
+        $post['upload_file']  = curl_file_create(realpath($file['name']),$file['type'],$file['name']);
+
+//        $json_data=json_encode($post);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+
+        curl_setopt($ch,CURLOPT_COOKIE,$cookies);
+
+        //打印请求头
+
+
+        $content = curl_exec($ch);
+
+
+        curl_close($ch);//关闭会话
+        return $content;
     }
 
 
