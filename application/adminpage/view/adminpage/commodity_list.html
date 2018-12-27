@@ -140,24 +140,24 @@
      <div  style="width:630px;height:480px;overflow-y:scroll; ">
          <div class="fbneirong" >
              <ul class="am-list" >
-                 <li><a name="add-input">标题：</a></li>
-                 <li><a name="add-input">价格：</a></li>
-                 <li><a name="add-input">品牌：</a></li>
-                 <li><a name="add-input">颜色：</a></li>
-                 <li><a name="add-input">cpu：</a></li>
-                 <li><a name="add-input">生产日期：</a></li>
-                 <li><a name="add-input">显卡：</a></li>
-                 <li><a name="add-input">型号：</a></li>
-                 <li><a name="add-input">系统：</a></li>
-                 <li><a name="add-input">定位：</a></li>
-                 <li><a name="add-input">显存：</a></li>
-                 <li><a name="add-input">内存：</a></li>
-                 <li><a name="add-input">硬盘类型：</a></li>
-                 <li><a name="add-input">屏幕尺寸：</a></li>
-                 <li><a name="add-input">系列：</a></li>
-                 <li><a name="add-input">厚度(mm)：</a></li>
-                 <li><a name="add-input">类型：</a></li>
-                 <li><a name="add-input">重量(kg)：</a></li>
+                 <li><a style="color: black" name="danchu-a">标题：</a></li>
+                 <li><a style="color: black" name="danchu-a">价格：</a></li>
+                 <li><a style="color: black" name="danchu-a">品牌：</a></li>
+                 <li><a style="color: black" name="danchu-a">颜色：</a></li>
+                 <li><a style="color: black" name="danchu-a">cpu：</a></li>
+                 <li><a style="color: black" name="danchu-a">生产日期：</a></li>
+                 <li><a style="color: black" name="danchu-a">显卡：</a></li>
+                 <li><a style="color: black" name="danchu-a">型号：</a></li>
+                 <li><a style="color: black" name="danchu-a">系统：</a></li>
+                 <li><a style="color: black" name="danchu-a">定位：</a></li>
+                 <li><a style="color: black" name="danchu-a">显存：</a></li>
+                 <li><a style="color: black" name="danchu-a">内存：</a></li>
+                 <li><a style="color: black" name="danchu-a">硬盘类型：</a></li>
+                 <li><a style="color: black" name="danchu-a">屏幕尺寸：</a></li>
+                 <li><a style="color: black" name="danchu-a">系列：</a></li>
+                 <li><a style="color: black" name="danchu-a">厚度(mm)：</a></li>
+                 <li><a style="color: black" name="danchu-a">类型：</a></li>
+                 <li><a style="color: black" name="danchu-a">重量(kg)：</a></li>
              </ul>
 
          </div>
@@ -173,11 +173,6 @@
       <ul class="am-icon-flag on"> 商品列表</ul>
       
       <dl class="am-icon-home" style="float: right;"> 当前位置： 首页 > <a href="#">商品列表</a></dl>
-      
-      <dl>
-          <a type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" data-am-modal="{target: '#my-popup'}"> 给商品添加评论</a>
-      </dl>
-      
       
     </div>
 
@@ -228,12 +223,12 @@
               <tr class="am-success">
                 <th class="table-check"><input type="checkbox" /></th>
                 <th class="table-type">品牌</th>
-                <th class="table-id">ID</th>
+                <th class="table-id">商品ID</th>
                 <th class="table-title">标题</th>
                 <th class="table-type">价格</th>
-                  <th class="table-type">系列</th>
+                  <th class="table-date am-hide-sm-only">上架</th>
                 <th class="table-date am-hide-sm-only">发行日期</th>
-                <th width="163px" class="table-set">操作</th>
+                <th width="150px" class="table-set">操作</th>
               </tr>
             </thead>
             <tbody>
@@ -242,19 +237,51 @@
                 <td><input type="checkbox" /></td>
                 <td>{$vo.brand}</td>
                 <td>{$vo.commodity_id}</td>
-              
-                <td><a href="#">{$vo.name}</a></td>
+
+                <td>{$vo.name}</td>
                 <td>{$vo.price}</td>
 
-                <td>{$vo.series}</td>
+                <td>
+
+
+                    {switch $vo.status}
+                    {case value="1"}<i name="icon{$vo.commodity_id}" class="am-icon-check am-text-warning"></i>{/case}
+                    {case value=""}<i name="icon{$vo.commodity_id}" class="am-icon-close am-text-primary"></i>{/case}
+                    {default /}default
+                    {/switch}
+
+                </td>
+                <!--<i class="am-icon-close am-text-primary">-->
+
+                    <input type="hidden"  name="{$vo.commodity_id}" class="am-input-sm" id="add-name" value={$vo.name}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-price" value={$vo.price}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-brand" value={$vo.brand}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-color" value={$vo.color}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-cpu" value={$vo.cpu}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-date" value={$vo.date}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-gpu" value={$vo.gpu}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-bid" value={$vo.bid}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-os" value={$vo.os}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-position" value={$vo.position}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-ram" value={$vo.ram}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-rom" value={$vo.rom}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-rom_type" value={$vo.rom_type}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-screen_type" value={$vo.screen_type}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-series" value={$vo.series}>
+                    <input type="hidden"  name="{$vo.commodity_id}"class="am-input-sm" id="add-thickness" value={$vo.thickness}>
+                    <input type="hidden" name="{$vo.commodity_id}" class="am-input-sm" id="add-type" value={$vo.type}>
+                    <input type="hidden"  name="{$vo.commodity_id}" class="am-input-sm" id="add-weight" value={$vo.weight}>
+
+                   <input type="hidden"  name="status{$vo.commodity_id}" class="am-input-sm" id="add-status" value={$vo.status}>
+
                 <td class="am-hide-sm-only">{$vo.date}</td>
                 <td><div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
 
-                        <a id='a{$vo.commodity_id}'  type="button" data-am-modal="{target: '#my-popup'}" name="delbtn" class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span> </a>
-                        <a id='b{$vo.commodity_id}' name="delbtn" class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"><span class="am-icon-pencil-square-o"></span></a>
+                        <a id='a-{$vo.commodity_id}' title="预览" type="button" data-am-modal="{target: '#my-popup'}" name="delbtn" class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span> </a>
+                        <a id='b-{$vo.commodity_id}' title="修改信息" name="delbtn" class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"><span class="am-icon-pencil-square-o"></span></a>
 
-                        <a id='c{$vo.commodity_id}' name="delbtn" class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-trash-o"></span></a>
+                        <a id='c-{$vo.commodity_id}' title="更改状态" name="delbtn" class="am-btn am-btn-default am-btn-xs am-text-danger am-round"><span class="am-icon-cog"></span></a>
                     </div>
                 </div></td>
             </tr>
@@ -265,9 +292,9 @@
           </table>
           
                  <div class="am-btn-group am-btn-group-xs">
-              <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 删除</button>
-              <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 上架</button>-->
-              <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 下架</button>-->
+
+              <a type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 上架</a>
+              <a type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 下架</a>
               <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 移动</button>-->
               <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>-->
               <!--<button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>-->
@@ -329,17 +356,90 @@
 <!--<![endif]-->
 <script>
     $('document').ready(function () {
-
-        $("a[name='delbtn']").click(function () {
-
-
-            var del_id=$(this).attr('id')
-
-
-
-
+          var moren=[]
+        $("a[name='danchu-a']").each(function(){
+            moren.push($(this).text())
         })
 
+        $("a[name='delbtn']").click(function () {
+            
+             var btn_id=$(this).attr('id')
+             var com_id=btn_id.split('-')
+            switch(com_id[0])
+            {   
+                
+                case 'a'://预览
+                    Preview(com_id[1])
+                    break;
+                case 'b'://修改商品信息
+                    console.log('b')
+                    break;
+                case 'c'://更改在售状况
+                    Changestatus(com_id[1])
+                    break;
+                default:
+                    console.log('出错')
+            }
+
+        })
+        //预览
+        function Preview(com_id) {
+            var p_data=[]
+
+            $("input[name="+com_id+"]").each(function(){
+
+
+                p_data.push($(this).val())
+            })
+            $("a[name='danchu-a']").each(function(){
+                $(this).text('')
+            })
+             var temp=0
+            $("a[name='danchu-a']").each(function(){
+
+                var new_data=moren[temp]+p_data[temp]
+                $(this).text(new_data)
+                temp=temp+1
+                // a_obj.push($(this))
+            })
+
+        }
+
+
+        //更改在售状况
+        function Changestatus(com_id) {
+
+              var status_hint_name='status'+com_id
+              var status_num=$("input[name="+status_hint_name+"]").val()
+
+              var status
+              if(status_num=='1')
+                   status=false
+              else
+                  status=true
+
+
+                $.ajax({
+                    url:'/commodity_list/',
+                    type:'POST',
+                    data:{option:'change',com_id:com_id,status:status},
+                    success:function(databack){
+
+
+
+                        var  a_name='icon'+com_id
+                        var a_obj=$("i[name="+a_name+"]")
+                        if(databack=='true')
+                            a_obj.attr("class","am-icon-check am-text-warning");
+                        else
+                            a_obj.attr("class","am-icon-close am-text-primary");
+
+
+                    }
+
+                })
+
+        }
 
     })
 

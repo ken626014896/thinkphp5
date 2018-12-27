@@ -32,10 +32,35 @@ class Index extends  Controller
     }
     //得到所有商品
     public  function  post(){
+        //通过ajax 修改信息或更改状态
+        if(request()->isAjax()){
+
+            $move=input('option');
+            if($move=='change'){
+
+                $com_id=input('com_id');
+                $status=input('status');
+
+                $this->change_status($com_id,$status);
+                return $status;
+            }
+
+
+
+
+        }
+
         $this->init();
         $url='http://119.23.44.138:10001/commodity/get_detail?page=1';
         $result=$this->get_commodity($url);
+        if ($result==0)
+            $commodity_list=null;
+
+
+
         $commodity_list=json_decode($result ,true)["Data"];
+        if($commodity_list!=null)
+            $commodity_sum=array_shift ($commodity_list);
 
         $this->assign([
             'username'  =>  $this->username,
@@ -47,13 +72,61 @@ class Index extends  Controller
 
     }
 
+    public  function  change_status($com_id,$stat){
 
+        $this->init();
+        $url='http://119.23.44.138:10001/commodity/update_status';
+
+
+        $cookies='beegosessionID='.$this->cookies.'; Path=/; HttpOnly';
+
+
+        $ch =curl_init();
+
+        $header[] = "Content-type: application/json";
+        curl_setopt($ch, CURLOPT_POST, 1);
+        //设置post数据
+
+        if($stat=='true')
+            $status=true;
+        else
+            $status=false;
+        $post_data = array(
+            "commodity_id" => (int)$com_id,
+            "status" => $status
+        );
+        $json_data=json_encode($post_data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,  $json_data);
+
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch,CURLOPT_HEADER,true);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+
+        curl_setopt($ch,CURLOPT_COOKIE,$cookies);
+
+
+        $content = curl_exec($ch);
+
+
+        curl_close($ch);//关闭会话
+
+    }
     public function  get_commodity($url) {
+        try
+        {
+            $result = file_get_contents($url);
+            return  $result;
+        }
+// 捕获异常
+        catch(Exception $e)
+        {
+            return  0;
+        }
 
-        $result = file_get_contents($url);
 
 
-        return  $result;
+
     }
 
 
