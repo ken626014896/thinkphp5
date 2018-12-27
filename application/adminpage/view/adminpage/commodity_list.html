@@ -86,14 +86,14 @@
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
-        <li><a href="order_list.html">订单列表</a></li>
+        <li><a href="/order_list">订单列表</a></li>
 
         <li><a href="add_order.html">添加订单</a></li>
 
       </ul>
   <h3 class="am-icon-users"><em></em> <a href="#">会员管理</a></h3>
       <ul>
-        <li><a href="member_list.html">会员列表 </a></li>
+        <li><a href="/member_list">会员列表 </a></li>
       </ul>
     </div>
     <!-- sideMenu End --> 
@@ -134,10 +134,35 @@
 </div>
 <div class="am-popup am-popup-inner" id="my-popup">
         <div class="am-popup-hd">
-            <h4 class="am-popup-title">添加商品一级分类</h4>
+            <h4 class="am-popup-title">详细信息</h4>
             <span data-am-modal-close
                   class="am-close">&times;</span> </div>
-           <a id="comment_title"></a>
+     <div  style="width:630px;height:480px;overflow-y:scroll; ">
+         <div class="fbneirong" >
+             <ul class="am-list" >
+                 <li><a name="add-input">标题：</a></li>
+                 <li><a name="add-input">价格：</a></li>
+                 <li><a name="add-input">品牌：</a></li>
+                 <li><a name="add-input">颜色：</a></li>
+                 <li><a name="add-input">cpu：</a></li>
+                 <li><a name="add-input">生产日期：</a></li>
+                 <li><a name="add-input">显卡：</a></li>
+                 <li><a name="add-input">型号：</a></li>
+                 <li><a name="add-input">系统：</a></li>
+                 <li><a name="add-input">定位：</a></li>
+                 <li><a name="add-input">显存：</a></li>
+                 <li><a name="add-input">内存：</a></li>
+                 <li><a name="add-input">硬盘类型：</a></li>
+                 <li><a name="add-input">屏幕尺寸：</a></li>
+                 <li><a name="add-input">系列：</a></li>
+                 <li><a name="add-input">厚度(mm)：</a></li>
+                 <li><a name="add-input">类型：</a></li>
+                 <li><a name="add-input">重量(kg)：</a></li>
+             </ul>
+
+         </div>
+     </div>
+
     </div>
 	
 
@@ -217,11 +242,10 @@
                 <td><input type="checkbox" /></td>
                 <td>{$vo.brand}</td>
                 <td>{$vo.commodity_id}</td>
+              
                 <td><a href="#">{$vo.name}</a></td>
                 <td>{$vo.price}</td>
-                <td hidden>{$vo.price}</td>
-                <td hidden>{$vo.price}</td>
-                <td hidden>{$vo.price}</td>
+
                 <td>{$vo.series}</td>
                 <td class="am-hide-sm-only">{$vo.date}</td>
                 <td><div class="am-btn-toolbar">
@@ -311,7 +335,7 @@
 
             var del_id=$(this).attr('id')
 
-           $('#comment_title').text('sssss')
+
 
 
         })

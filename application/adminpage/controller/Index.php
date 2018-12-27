@@ -155,7 +155,18 @@ class Index extends  Controller
     }
 
     public  function  add_commodity(){
+        //使用ajax添加商品
+        if(request()->isAjax()){
 
+            $post_data=input('aaa');
+
+            $arr_data=json_decode($post_data,true);
+            $this->add_commodity_post($arr_data);
+
+            $msg='添加成功';
+            return $msg;
+
+        }
         $this->init();
         $this->assign([
             'username'  =>  $this->username,
@@ -164,6 +175,38 @@ class Index extends  Controller
 
         return $this->fetch('adminpage/add_commodity');
 
+
+
+    }
+    public function add_commodity_post($arr_data){
+        $this->init();
+        $url='http://119.23.44.138:10001/commodity/add';
+
+
+        $cookies='beegosessionID='.$this->cookies.'; Path=/; HttpOnly';
+
+
+        $ch =curl_init();
+
+        $header[] = "Content-type:application/json";
+        curl_setopt($ch, CURLOPT_POST, 1);
+        //设置post数据
+
+
+        $json_data=json_encode($arr_data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+
+        curl_setopt($ch,CURLOPT_COOKIE,$cookies);
+
+        $content = curl_exec($ch);
+
+
+        curl_close($ch);//关闭会话
 
 
     }

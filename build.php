@@ -39,7 +39,7 @@ return [
     'adminpage'     => [
         '__file__'   => ['common.php'],
         '__dir__'    => ['behavior', 'controller', 'model', 'view'],
-        'controller' => ['Login', ],
+        'controller' => ['Login','Member' ,'Order'],
         'model'      => ['User'],
         'view'       => ['adminpage/adminpage'],
     ],

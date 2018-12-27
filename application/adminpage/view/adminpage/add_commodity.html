@@ -82,14 +82,14 @@
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
-        <li><a href="order_list.html">订单列表</a></li>
+        <li><a href="/order_list">订单列表</a></li>
 
         <li><a href="add_order.html">添加订单</a></li>
 
       </ul>
   <h3 class="am-icon-users"><em></em> <a href="#">会员管理</a></h3>
       <ul>
-        <li><a href="member_list.html">会员列表 </a></li>
+        <li><a href="/member_list">会员列表 </a></li>
       </ul>
     </div>
     <!-- sideMenu End --> 
@@ -148,13 +148,13 @@
         <div class="am-form-group am-cf">
           <div class="zuo">标题：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="doc-ipt-email-1" placeholder="请输入标题">
+            <input type="text"  name="add-input" class="am-input-sm" id="add-name" placeholder="请输入标题">
           </div>
         </div>
         <div class="am-form-group am-cf">
           <div class="zuo">价格：</div>
           <div class="you">
-            <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+            <input type="text" name="add-input" class="am-input-sm" id="add-price" placeholder="请输入关键词">
           </div>
         </div>
 
@@ -168,77 +168,112 @@
           <div class="am-form-group am-cf">
               <div class="zuo">品牌：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-brand" placeholder="请输入关键词">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">颜色：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-color" placeholder="请输入关键词">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">cpu：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-cpu" placeholder="请输入关键词">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">生产日期：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-date" placeholder="请输入关键词">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">显卡：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-gpu" placeholder="请输入关键词">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">型号：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-bid" placeholder="请输入关键词">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">系统：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-os" placeholder="请输入关键词">
               </div>
           </div>
           <div class="am-form-group am-cf">
               <div class="zuo">定位：</div>
               <div class="you">
-                  <input type="text" class="am-input-sm" id="doc-ipt-pwd-1" placeholder="请输入关键词">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-position" placeholder="请输入关键词">
               </div>
+
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">显存：</div>
+              <div class="you">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-ram" placeholder="请输入关键词">
+              </div>
+
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">内存：</div>
+              <div class="you">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-rom" placeholder="请输入关键词">
+              </div>
+
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">硬盘类型：</div>
+              <div class="you">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-rom_type" placeholder="请输入关键词">
+              </div>
+
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">屏幕尺寸：</div>
+              <div class="you">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-creen_type" placeholder="请输入关键词">
+              </div>
+
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">系列：</div>
+              <div class="you">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-series" placeholder="请输入关键词">
+              </div>
+
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">厚度：</div>
+              <div class="you">
+                  <input type="text"  name="add-input"class="am-input-sm" id="add-thickness" placeholder="请输入关键词">
+              </div>
+
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">类型：</div>
+              <div class="you">
+                  <input type="text" name="add-input" class="am-input-sm" id="add-type" placeholder="请输入关键词">
+              </div>
+
+          </div>
+          <div class="am-form-group am-cf">
+              <div class="zuo">重量：</div>
+              <div class="you">
+                  <input type="text"  name="add-input" class="am-input-sm" id="add-weight" placeholder="请输入关键词">
+              </div>
+
           </div>
 
-
-
-
-
-
-        
-
-        
-        <div class="am-form-group am-cf">
-        <div class="zuo">推荐：</div>
-        <div class="you" style="margin-top: 5px;">
-          <label class="am-checkbox-inline">
-            <input type="checkbox" value="option1">
-            选我 </label>
-          <label class="am-checkbox-inline">
-            <input type="checkbox" value="option2">
-            同时可以选我 </label>
-          <label class="am-checkbox-inline">
-            <input type="checkbox" value="option3">
-            还可以选我 </label>
-            </div>
-        </div>
         <div class="am-form-group am-cf">
           <div class="you" style="margin-left: 11%;">
-              <button type="submit" class="am-btn am-btn-success am-radius">发布并关闭窗口</button>&nbsp;  &raquo; &nbsp; <button type="submit" class="am-btn am-btn-secondary am-radius">发布并继续发布</button>
+              <a type="submit" id='addbtn' class="am-btn am-btn-success am-radius">发布并关闭窗口</a>&nbsp;
 
           </div>
         </div>
@@ -282,10 +317,14 @@
 <script>
     $('document').ready(function () {
 
+
+        var img_list=[];
+        var img_obj
+        // 上传图片
         $("#upload_btn").click(function () {
 
 
-            var img_obj = $("#upload_img")[0].files[0];
+            img_obj = $("#upload_img")[0].files[0];
             if (img_obj==null){
                 alert('请上传图片');
             }
@@ -304,6 +343,7 @@
                            var json_data= JSON.parse(databack)
                            var a=json_data.Data
                            var img_name=a[0].path
+                           img_list.push(img_name)
                            console.log('返回的图片名字'+img_name)
 
                            if(json_data.Code==0)
@@ -320,6 +360,52 @@
 
 
         })
+
+         //上传数据
+         $('#addbtn').click(function () {
+
+             if (img_obj==null){
+                 alert('请先上传图片');
+             }
+             else{
+                 var p_data ={};
+
+
+                 p_data.images= img_list;
+                 p_data.status= true;
+
+
+                 $("input[name='add-input']").each(function(){
+                     var temp=$(this).attr('id').split('-')
+                     var add_id=temp[1]
+                     if(add_id=='price'){
+                           if($(this).val()==null ||$(this).val()=='')
+                               p_data[add_id]=0
+                           else
+                               p_data[add_id]=parseInt($(this).val())
+                     }
+
+                     else
+                         p_data[add_id]=$(this).val()
+                 })
+                 var string_obj=JSON.stringify(p_data)
+                 console.log(string_obj)
+                 $.ajax({
+                     url:'/add_commodity/',
+                     type:'POST',
+                     data: {'aaa':string_obj},
+                     dataType:'json',
+
+                     success:function(databack){
+                         alert(databack)
+                         window.location.href='http://www.notebook.org/login';
+
+                     }
+                 })
+             }
+
+         })
+
 
 
         })
