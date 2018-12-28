@@ -117,7 +117,7 @@
         <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
           <thead>
             <tr class="am-success">
-              <th class="table-check"><input type="checkbox" /></th>
+              <th class="table-check"><input type="checkbox" name="allcheckbox"/></th>
               <th class="table-type">用户名</th>
               <th class="table-id am-text-center">用户ID</th>
               <th class="table-id am-text-center">评论ID</th>
@@ -207,6 +207,37 @@
 <script>
        $('document').ready(function () {
 
+          //全选
+         $("input[name='allcheckbox']").click(function () {
+
+           var  allcheckbox_obj=$(this)
+           if(allcheckbox_obj.is(":checked"))
+           {
+
+             $("input[name='comment_checkbox']").each(function(){
+
+                  $(this).prop("checked", true);
+
+             })
+
+           }
+
+           else
+           {
+
+             $("input[name='comment_checkbox']").each(function(){
+
+               $(this).prop("checked", false);
+
+
+             })
+
+           }
+         })
+
+
+
+
             $("a[name='delbtn']").click(function () {
 
               //要删除的评论id
@@ -270,25 +301,6 @@
 
               }
 
-
-
-
-              // var statu = confirm("你确定要删除该评论？");
-              // if(!statu){
-              //   return false;
-              // }
-              // $.ajax({
-              //   url:'/comment_list/',
-              //   type:'POST',
-              //   data:{del_id:del_id,user_id:user_id},
-              //   success:function(databack){
-              //     console.log(databack)
-              //     del_tr.hide()
-              //   }
-              //
-              //
-              //
-              // })
 
             })
 

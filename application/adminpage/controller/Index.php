@@ -32,7 +32,7 @@ class Index extends  Controller
     }
     //得到所有商品
     public  function  post(){
-        //通过ajax 修改信息或更改状态
+        //通过ajax 更改状态
         if(request()->isAjax()){
 
             $move=input('option');
@@ -51,20 +51,23 @@ class Index extends  Controller
         }
 
         $this->init();
-        $url='http://119.23.44.138:10001/commodity/get_detail?page=1';
+        $url='http://119.23.44.138:10001/commodity/get_detail?page=0';
         $result=$this->get_commodity($url);
         if ($result==0)
             $commodity_list=null;
 
 
+        $commodity_sum=0;//商品总数
 
         $commodity_list=json_decode($result ,true)["Data"];
         if($commodity_list!=null)
             $commodity_sum=array_shift ($commodity_list);
 
+
         $this->assign([
             'username'  =>  $this->username,
              'commodity_list' =>$commodity_list,
+            'com_sum'=>$commodity_sum['total_count']
         ]);
 
 
@@ -330,6 +333,48 @@ class Index extends  Controller
         curl_close($ch);//关闭会话
         return $content;
     }
+     public function change_msg(){
+         $post_data=input('bbb');
+
+         $arr_data=json_decode($post_data,true);
+         $this->change_msg_post($arr_data);
+
+         $msg='修改成功';
+         return $msg;
 
 
+
+     }
+    public function change_msg_post($arr_data){
+        $this->init();
+        $url='http://119.23.44.138:10001/commodity/update';
+
+
+        $cookies='beegosessionID='.$this->cookies.'; Path=/; HttpOnly';
+
+
+        $ch =curl_init();
+
+        $header[] = "Content-type:application/json";
+        curl_setopt($ch, CURLOPT_POST, 1);
+        //设置post数据
+
+
+        $json_data=json_encode($arr_data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+
+        curl_setopt($ch,CURLOPT_COOKIE,$cookies);
+
+        $content = curl_exec($ch);
+
+
+        curl_close($ch);//关闭会话
+
+
+    }
 }
