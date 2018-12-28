@@ -21,11 +21,15 @@ Route::rule('testfetch','login/Login/sendtofetch');
 
 Route::rule('adminlogin','adminpage/Login/login');
 Route::rule('index','adminpage/Index/index');
-Route::rule('commodity_list/','adminpage/Index/post');
+Route::rule('commodity_list','adminpage/Index/post');
 Route::rule('comment_list/','adminpage/Index/comment');
 Route::rule('add_commodity/','adminpage/Index/add_commodity');
 Route::rule('upload_img/','adminpage/Index/upload');
 Route::rule('change_msg/','adminpage/Index/change_msg');
+Route::rule('change_msg/','adminpage/Index/change_msg');
+
+
 Route::rule('member_list/','adminpage/Member/member');
+
 
 Route::rule('order_list/','adminpage/Order/order');

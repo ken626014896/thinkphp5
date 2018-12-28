@@ -31,7 +31,7 @@ class Index extends  Controller
 
     }
     //得到所有商品
-    public  function  post(){
+    public  function  post($page){
         //通过ajax 更改状态
         if(request()->isAjax()){
 
@@ -49,9 +49,11 @@ class Index extends  Controller
 
 
         }
+        $page=(int)$page;
+        $page=$page-1;
 
         $this->init();
-        $url='http://119.23.44.138:10001/commodity/get_detail?page=0';
+        $url='http://119.23.44.138:10001/commodity/admin/get_detail?page='.$page;
         $result=$this->get_commodity($url);
         if ($result==0)
             $commodity_list=null;
@@ -116,24 +118,36 @@ class Index extends  Controller
 
     }
     public function  get_commodity($url) {
-        try
-        {
-            $result = file_get_contents($url);
-            return  $result;
-        }
-// 捕获异常
-        catch(Exception $e)
-        {
-            return  0;
-        }
+        $this->init();
 
+        $cookies='beegosessionID='.$this->cookies.'; Path=/; HttpOnly';
+
+
+        $ch =curl_init();
+
+        $header[] = "Content-type: application/json; charset=utf-8";
+
+
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,$header);
+
+        curl_setopt($ch,CURLOPT_COOKIE,$cookies);
+
+
+        $content = curl_exec($ch);
+
+        curl_close($ch);
+
+        return   $content ;
 
 
 
     }
 
 
-    public  function  comment(){
+    public  function  comment($page){
         //使用ajax请求删除评论
         if(request()->isAjax()){
 
@@ -149,13 +163,18 @@ class Index extends  Controller
         }
 
         //得到评论
-        $comment_list=json_decode($this->get_comment(),true)['Data'];
+        $page=(int)$page;
+        $page=$page-1;
+        $comment_list=json_decode($this->get_comment($page),true)['Data'];
+
+        $comment_sum=0 ; //初始化评论数
         if($comment_list!=null)
          $comment_sum=array_shift ($comment_list);
 
         $this->assign([
             'username'  =>  $this->username,
             'comment_list' =>$comment_list,
+            'comment_sum'=>$comment_sum['total_count']
         ]);
 
 
@@ -200,9 +219,9 @@ class Index extends  Controller
 
     }
 
-    public  function  get_comment(){
+    public  function  get_comment($page){
         $this->init();
-        $url='http://119.23.44.138:10001/comment/admin/get';
+        $url='http://119.23.44.138:10001/comment/admin/get?page'.$page;
 
 
         $cookies='beegosessionID='.$this->cookies.'; Path=/; HttpOnly';

@@ -14,6 +14,7 @@
 <meta name="apple-mobile-web-app-title" content="Amaze UI" />
   <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="/static/assets/css/admin.css">
+  <link rel="stylesheet" href="/static/assets/css/myPagination.css">
   <script src="/static/assets/js/jquery.min.js"></script>
   <script src="/static/assets/js/app.js"></script>
 </head>
@@ -30,9 +31,9 @@
 
  <li class="kuanjie">
   
-  <a href="member_list.html">会员管理</a>
+  <a href="/member_list">会员管理</a>
   <a href="order_list.html">订单管理</a>
-  <a href="commodity_list.html">产品管理</a>
+  <a href="/commodity_list?page=1">产品管理</a>
  </li>
       <li class="soso">
         <p>
@@ -59,10 +60,10 @@
     <div class="sideMenu">
       <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
       <ul>
-        <li><a href="commodity_list.html">商品列表</a></li>
+        <li><a href="/commodity_list?page=1">商品列表</a></li>
         <li class="func" dataType='html' dataLink='msn.htm' iconImg='images/msn.gif' ><a href="/add_commodity">添加新商品</a></li>
 
-        <li><a href="/comment_list">用户评论</a></li>
+        <li><a href="/comment_list?page=1">用户评论</a></li>
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
@@ -136,7 +137,7 @@
             <td>{$vo.username} </td>
             <td class="am-text-center">{$vo.user_id}</td>
             <td class="am-text-center">{$vo.comment_id}</td>
-            <td><a href="#">{$vo.content}</a></td>
+            <td>{$vo.content}</td>
             <td>{$vo.commodity_id}</td>
             <td>{$vo.create_time}</td>
 
@@ -156,31 +157,11 @@
 
           <a name="delbtnchose" type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</a>
         </div>
-        <ul class="am-pagination am-fr">
-          <li class="am-disabled"><a href="#">«</a></li>
-          <li class="am-active"><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#">»</a></li>
-        </ul>
+
         <hr />
-        <p>
-        <!-- 备注：操作图标含义
-         <a class="am-text-success am-icon-file" title="添加子栏目"> 添加子栏目</a> 
-         <a class="am-icon-pencil-square-o am-text-secondary" title="修改"> 修改栏目</a> 
-         <a class="am-icon-copy am-text-warning" title="复制"> 复制栏目</a> 
-         <a class="am-icon-trash-o am-text-danger" title="删除"> 删除栏目</a> -->
-         
 
-        
-        
-        
-        
-        </p>
       </form>
-
+      <div id="pagination" class="pagination"></div>
       <div class="foods">
   <!--       <ul>
           版权所有@2015
@@ -199,15 +180,46 @@
 <script src="/static/assets/js/polyfill/rem.min.js"></script>
 <script src="/static/assets/js/polyfill/respond.min.js"></script>
 <script src="/static/assets/js/amazeui.legacy.js"></script>
+<script src="/static/assets/js/myPagination.js"></script>
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
 <script src="/static/assets/js/amazeui.min.js"></script>
+<script src="/static/assets/js/myPagination.js"></script>
 <!--<![endif]-->
 <script>
        $('document').ready(function () {
 
-          //全选
+         var sum=parseInt({$comment_sum})
+         //分页
+         if(sum<20)
+           page_num=1
+         else
+            page_num=sum %20;
+         console.log(page_num)
+         var str=location.href
+
+         var page_cur=str.split('?')[1].split('=')[1] //当前页面
+
+         new Page({
+           id: 'pagination',
+           pageTotal: page_num, //必填,总页数
+           pageAmount: 10,  //每页多少条
+           dataTotal: 500, //总共多少条数据
+           curPage:parseInt(page_cur), //初始页码,不填默认为1
+           pageSize: 5, //分页个数,不填默认为5
+           showPageTotalFlag:false, //是否显示数据统计,不填默认不显示
+           showSkipInputFlag:true, //是否支持跳转,不填默认不显示
+           getPage: function (page) {
+             //获取当前页数
+             console.log(page);
+
+             window.location.href='http://www.notebook.org/comment_list?page='+ page
+           }
+         })
+
+
+         //全选
          $("input[name='allcheckbox']").click(function () {
 
            var  allcheckbox_obj=$(this)
@@ -254,8 +266,12 @@
               if(!statu){
                 return false;
               }
+
+              var str=location.href
+
+              var page_str=str.split('?')[1]
               $.ajax({
-                url:'/comment_list/',
+                url:'/comment_list?'+page_str,
                 type:'POST',
                 data:{del_id:del_id,user_id:user_id},
                 success:function(databack){
@@ -281,10 +297,14 @@
                     var arr=obj[k].value.split("+");
                     //arr[0]是用户id
                     var del_id=arr[1]
+
+                    var str=location.href
+
+                    var page_str=str.split('?')[1]
                     $("tr[name="+del_id+"]").hide()
 
                         $.ajax({
-                          url:'/comment_list/',
+                          url:'/comment_list?'+page_str,
                           type:'POST',
                           data:{del_id:arr[1],user_id:arr[0]},
                           success:function(databack){
