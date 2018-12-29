@@ -7,6 +7,11 @@ use  think\Session;
 class Login extends  Controller
 {
       public function login(){
+          if (Session::has('loginname')){
+
+              $this->success('已登陆','adminpage/Index/index');
+
+          }
 
           if(request()->isAjax()){
 
@@ -64,5 +69,13 @@ class Login extends  Controller
 
 
         return  $res_data;
+    }
+    public function loginout(){
+
+            Session::delete(' cookies');
+            Session::delete('loginname');
+            $this->success('退出成功','adminpage/Login/login');
+
+
     }
 }

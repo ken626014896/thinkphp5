@@ -37,30 +37,11 @@
 
  <li class="kuanjie">
   
-  <a href="member_list.html">会员管理</a>
-  <a href="order_list.html">订单管理</a>
+  <a href="/member_list?page=1">会员管理</a>
+  <a href="/order_list?page=1">订单管理</a>
   <a href="/commodity_list?page=1">产品管理</a>
+     <a href="/loginout">退出</a>
  </li>
-
- <li class="soso">
- 	
-<p>   
-	
-	<select data-am-selected="{btnWidth: 70, btnSize: 'sm', btnStyle: 'default'}">
-          <option value="b">全部</option>
-          <option value="o">产品</option>
-          <option value="o">会员</option>
-          
-        </select>
-
-</p>
-
-<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="圆角表单域" /></p>
-<p><button class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p>
- </li>
-
-
-
 
       <li class="am-hide-sm-only" style="float: right;"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
     </ul>
@@ -72,7 +53,7 @@
 <div class="nav-navicon admin-main admin-sidebar">
     
     
-    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎系统管理员：zxl</div>
+    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎系统管理员：{$username}</div>
     <div class="sideMenu">
       <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
       <ul>
@@ -83,14 +64,14 @@
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
-        <li><a href="/order_list">订单列表</a></li>
+        <li><a href="/order_list?page=1">订单列表</a></li>
 
-        <li><a href="add_order.html">添加订单</a></li>
+
 
       </ul>
    <h3 class="am-icon-users"><em></em> <a href="#">会员管理</a></h3>
       <ul>
-        <li><a href="/member_list">会员列表 </a></li>
+        <li><a href="/member_list?page=1">会员列表 </a></li>
       </ul>
     </div>
     <!-- sideMenu End --> 
@@ -169,28 +150,14 @@
 
             </tbody>
           </table>
-          
 
-          
-          <ul class="am-pagination am-fr">
-                <li class="am-disabled"><a href="#">«</a></li>
-                <li class="am-active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-              </ul>
-          
-          
-          
       
           <hr />
 <!--           <p>注：.....</p> -->
         </form>
- 
- 
- 
+
+
+    <div id="pagination" class="pagination"></div>
  
  <div class="foods">
 
@@ -228,4 +195,40 @@
 
 
 </body>
+<script>
+    $('document').ready(function () {
+        var sum=parseInt({$member_sum})
+        //分页
+        if(sum<20)
+            page_num=1
+        else
+            page_num=sum %20;
+
+        var str=location.href
+
+        var page_cur=str.split('?')[1].split('=')[1] //当前页面
+
+        new Page({
+            id: 'pagination',
+            pageTotal: page_num, //必填,总页数
+            pageAmount: 10,  //每页多少条
+            dataTotal: 500, //总共多少条数据
+            curPage:parseInt(page_cur), //初始页码,不填默认为1
+            pageSize: 5, //分页个数,不填默认为5
+            showPageTotalFlag:false, //是否显示数据统计,不填默认不显示
+            showSkipInputFlag:true, //是否支持跳转,不填默认不显示
+            getPage: function (page) {
+                //获取当前页数
+                console.log(page);
+
+                window.location.href='http://www.notebook.org/member_list?page='+ page
+            }
+        })
+
+
+
+    })
+
+
+</script>
 </html>

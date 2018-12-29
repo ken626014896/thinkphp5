@@ -67,8 +67,63 @@
 </div>
 </body>
 <script type="text/javascript" src="/static/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/assets/js/jquery.cookie.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
+
+    if($.cookie('username_cookie') == "null"){
+      $('#remember-me').prop("checked", false);
+
+      $('#username').val('')
+      $('#password').val('')
+
+    }
+    else {
+
+      $('#remember-me').prop("checked", true);
+      $('#username').val($.cookie('username_cookie'))
+      $('#password').val($.cookie('password_cookie'))
+    }
+
+
+    $('#remember-me').click(function () {
+
+      var username=$('#username').val()
+      var password=$('#password').val()
+      if($(this).is(":checked"))
+      {
+         console.log('记住密码')
+        if(username==''||password=='')
+          {
+
+            alert('请输入完整')
+            $(this).prop("checked", false);
+          }
+          else {
+            $.cookie('username_cookie', username, { expires: 7 });
+            $.cookie('password_cookie', password, { expires: 7 });
+
+          }
+         }
+         else {
+        console.log('取消记住密码')
+        $.cookie('username_cookie', null);
+        $.cookie('password_cookie', null);
+
+      }
+
+
+
+    })
+
+    function setCookie(c_name,value,expiredays)
+    {
+      var exdate=new Date()
+      exdate.setDate(exdate.getDate()+expiredays)
+      document.cookie=c_name+ "=" +escape(value)+
+              ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+    }
+
 
 
     $("#btn").click(function(){

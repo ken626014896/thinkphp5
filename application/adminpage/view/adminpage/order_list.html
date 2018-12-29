@@ -39,30 +39,11 @@
 
  <li class="kuanjie">
   
-  <a href="/member_list">会员管理</a>
-  <a href="/order_list">订单管理</a>
+  <a href="/member_list?page=1">会员管理</a>
+  <a href="/order_list?page=1">订单管理</a>
   <a href="/commodity_list?page=1">产品管理</a>
+     <a href="/loginout">退出</a>
  </li>
-
- <li class="soso">
- 	
-<p>   
-	
-	<select data-am-selected="{btnWidth: 70, btnSize: 'sm', btnStyle: 'default'}">
-          <option value="b">全部</option>
-          <option value="o">产品</option>
-          <option value="o">会员</option>
-          
-        </select>
-
-</p>
-
-<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="圆角表单域" /></p>
-<p><button class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p>
- </li>
-
-
-
 
       <li class="am-hide-sm-only" style="float: right;"><a href="javascript:;" id="admin-fullscreen"><span class="am-icon-arrows-alt"></span> <span class="admin-fullText">开启全屏</span></a></li>
     </ul>
@@ -74,7 +55,7 @@
 <div class="nav-navicon admin-main admin-sidebar">
     
     
-    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎系统管理员：xzl</div>
+    <div class="sideMenu am-icon-dashboard" style="color:#aeb2b7; margin: 10px 0 0 0;"> 欢迎系统管理员：{$username}</div>
     <div class="sideMenu">
       <h3 class="am-icon-flag"><em></em> <a href="#">商品管理</a></h3>
       <ul>
@@ -85,14 +66,14 @@
       </ul>
       <h3 class="am-icon-cart-plus"><em></em> <a href="#"> 订单管理</a></h3>
       <ul>
-        <li><a href="/order_list">订单列表</a></li>
+        <li><a href="/order_list?page=1">订单列表</a></li>
 
-        <li><a href="add_order.html">添加订单</a></li>
+
 
       </ul>
       <h3 class="am-icon-users"><em></em> <a href="#">会员管理</a></h3>
       <ul>
-        <li><a href="/member_list">会员列表 </a></li>
+        <li><a href="/member_list?page=1">会员列表 </a></li>
       </ul>
     </div>
     <!-- sideMenu End --> 
@@ -178,15 +159,15 @@
           <table width="100%" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover">
             <thead>
               <tr class="am-success">
-                <th class="table-check"><input type="checkbox" /></th>
+                <th class="table-check"><input name='allcheckbox' type="checkbox" /></th>
 
-                <th class="table-title">订单id</th>
+                <th class="table-title">订单号</th>
                 <th class="table-title">商品id</th>
                 <th class="table-type">购买数量</th>
                 <th class="table-author am-hide-sm-only">是否发货</th>
                 <th class="table-title">用户id</th>
                 <th class="table-date am-hide-sm-only">购买日期</th>
-                <th width="150px" class="table-set">操作</th>
+                <th width="120px" class="table-set">操作</th>
               </tr>
             </thead>
             <tbody>
@@ -194,7 +175,7 @@
 
 
               <tr>
-                <td><input type="checkbox" /></td>
+                <td><input name='aa-checkbox' type="checkbox"  value="{$vo.order_id}+{$vo.user['user_id']}"/></td>
                 
                 <td> {$vo.order_id}</td>
                 <td>
@@ -213,7 +194,7 @@
                   <td class="am-hide-sm-only">{$vo.user['user_id']}</td>
                 <td class="am-hide-sm-only">{$vo.create_time}</td>
 
-                  <input type="hidden"  name="{$vo.order_id}" class="am-input-lg" id="add-order_id" value='{$vo.order_id}'>
+                   <input type="hidden"  name="{$vo.order_id}" class="am-input-lg" id="add-order_id" value='{$vo.order_id}'>
                    <input type="hidden"  name="{$vo.order_id}" class="am-input-lg" id="add-unit_price" value='{$vo.unit_price}'>
                    <input type="hidden"  name="{$vo.order_id}" class="am-input-lg" id="add-commodity_id" value="{$vo.commodity['commodity_id']}">
                    <input type="hidden"  name="{$vo.order_id}" class="am-input-lg" id="add-bid" value="{$vo.commodity['bid']}">
@@ -223,14 +204,20 @@
                    <input type="hidden"  name="{$vo.order_id}" class="am-input-lg" id="add-recv_telphone" value="{$vo.recv_address['recv_telphone']}">
                    <input type="hidden"  name="{$vo.order_id}" class="am-input-lg" id="add-address" value="{$vo.recv_address['address']}">
 
+                  <input type="hidden"  name="status{$vo.order_id}" class="am-input-lg" id="add-status" value="{$vo.status}">
+                  <input type="hidden"  name="id{$vo.order_id}" class="am-input-lg" id="add-user_id" value="{$vo.user['user_id']}">
+
 
                 <td>
                 	
                 	<div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                      <a  title="详细订单" type="button" data-am-modal="{target: '#my-popup'}" name="opbtn" class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span> </a>
-                      <a class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"  name="opbtn" title="确认发货">发货</a>
-                      <a class="am-btn am-btn-default am-btn-xs am-text-danger am-round" name="opbtn" title="删除订单"><span class="am-icon-trash-o" ></span></a>
+                      <a  title="详细订单" id="a-{$vo.order_id}" type="button" data-am-modal="{target: '#my-popup'}" name="opbtn" class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span> </a>
+                        {switch $vo.status}
+                        {case value='1'} <a class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"   id="b-{$vo.order_id}" name="opbtn" title="已发货">已发货</a>{/case}
+                        {case value='0'} <a class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"  id="b-{$vo.order_id}" name="opbtn" title="确认发货">发货</a>{/case}
+                        {default /}default
+                        {/switch}
                     </div>
                   </div>
                 
@@ -242,30 +229,18 @@
           </table>
           
                  <div class="am-btn-group am-btn-group-xs">
-              <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 删除</button>
-              <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 确认</button>
+
+              <a type="button" name='all-send' class="am-btn am-btn-default"><span class="am-icon-save"></span> 确认发货</a>
 
             </div>
           
-          <ul class="am-pagination am-fr">
-                <li class="am-disabled"><a href="#">«</a></li>
-                <li class="am-active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">»</a></li>
-              </ul>
-          
-          
-          
-      
+
           <hr />
 <!--           <p>注：.....</p> -->
         </form>
- 
- 
- 
+
+
+    <div id="pagination" class="pagination"></div>
  
  <div class="foods">
  <!--  <ul>
@@ -303,4 +278,195 @@
 
 
 </body>
+ <script>
+     $('document').ready(function () {
+         var sum=parseInt({$order_sum})
+         //分页
+         if(sum<20)
+             page_num=1
+         else
+             page_num=sum %20;
+
+         var str=location.href
+
+         var page_cur=str.split('?')[1].split('=')[1] //当前页面
+
+         new Page({
+             id: 'pagination',
+             pageTotal: page_num, //必填,总页数
+             pageAmount: 10,  //每页多少条
+             dataTotal: 500, //总共多少条数据
+             curPage:parseInt(page_cur), //初始页码,不填默认为1
+             pageSize: 5, //分页个数,不填默认为5
+             showPageTotalFlag:false, //是否显示数据统计,不填默认不显示
+             showSkipInputFlag:true, //是否支持跳转,不填默认不显示
+             getPage: function (page) {
+                 //获取当前页数
+                 console.log(page);
+
+                 window.location.href='http://www.notebook.org/order_list?page='+ page
+             }
+         })
+
+
+         var moren=[]
+         $("a[name='danchu-a']").each(function(){
+             moren.push($(this).text())
+         })
+
+         //全选
+         $("input[name='allcheckbox']").click(function () {
+
+             var  allcheckbox_obj=$(this)
+             if(allcheckbox_obj.is(":checked"))
+             {
+
+                 $("input[name='aa-checkbox']").each(function(){
+
+                     $(this).prop("checked", true);
+
+                 })
+
+             }
+
+             else
+             {
+
+                 $("input[name='aa-checkbox']").each(function(){
+
+                     $(this).prop("checked", false);
+
+
+                 })
+
+             }
+         })
+
+         //发货所选的全部
+         $("a[name='all-send']").click(function () {
+
+             var obj=$("input[name='aa-checkbox']")
+
+
+             for ( k in obj) {
+                 if(obj[k].checked){
+
+                     var arr=obj[k].value.split("+");
+                     //arr[0]是订单id   //arr[1]是用户id
+                     var order_id=arr[0]
+                     Sendgoods(order_id)
+                 }
+
+
+             }
+             alert('所选的以全部发货')
+
+
+         })
+
+         // 分发点击事件
+         $("a[name='opbtn']").click(function () {
+
+             var btn_id=$(this).attr('id')
+             var order_id=btn_id.split('-')
+             switch(order_id[0])
+             {
+
+                 case 'a'://预览
+
+                     Preview(order_id[1])
+                     break;
+                 case 'b'://发货
+                     Sendgoods(order_id[1])
+                     break;
+
+                 default:
+                     console.log('出错')
+             }
+
+         })
+
+        //预览订单信息
+         function Preview(order_id) {
+               var p_data=[]
+
+             $("input[name="+order_id+"]").each(function () {
+
+                   p_data.push($(this).val())
+             })
+             $("a[name='danchu-a']").each(function(){
+                 $(this).text('')
+             })
+             var temp=0
+             $("a[name='danchu-a']").each(function(){
+
+                 var new_data=moren[temp]+p_data[temp]
+                 $(this).text(new_data)
+                 temp=temp+1
+                 // a_obj.push($(this))
+             })
+
+
+         }
+         //确认发货
+         function Sendgoods(order_id) {
+             var status_hint_name='status'+order_id
+             var status_num=$("input[name="+status_hint_name+"]").val()
+
+             var user_id_name='id'+order_id
+             var user_id=$("input[name="+user_id_name+"]").val()
+
+
+             if(status_num=='1'){
+
+
+                console.log('已经发货')
+
+             }
+
+             else
+             {
+                 var str=location.href
+
+                 var page_str=str.split('?')[1]
+
+                 $.ajax({
+                     url:'/order_list?'+page_str,
+                     type:'POST',
+                     data:{order_id:order_id,user_id:user_id},
+                     success:function(databack){
+
+
+                         var input_obj=$("input[name="+status_hint_name+"]")
+
+                         var  a_name='icon'+order_id
+                         var a_obj=$("i[name="+a_name+"]")
+                         var btn_id='b-'+order_id
+
+                         var btn_obj=$("#"+btn_id)
+
+                         if(databack=='true')
+                         {
+                             a_obj.attr("class","am-icon-check am-text-warning");
+                             btn_obj.attr('title','已发货')
+                             btn_obj.text('已发货')
+                             input_obj.val('1')
+
+                         }
+
+                     }
+
+                 })
+             }
+
+
+
+
+         }
+
+
+
+     })
+
+ </script>
 </html>

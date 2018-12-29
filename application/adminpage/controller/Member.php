@@ -13,27 +13,37 @@ class Member extends  Controller
         $this->cookies = Session::get("cookies");
     }
 
-    public   function  member(){
+    public   function  member($page){
+        if (!Session::has('loginname')){
+
+            $this->error('未登录','adminpage/Login/login');
+
+        }
 
         $this->init();
-        $member_json=$this->get_member();
+        $page=(int)$page;
+        $page=$page-1;
+        $member_json=$this->get_member($page);
         $member_array=json_decode($member_json,true)['Data'];
+        $member_sum=0;
         if($member_array!=null)
             $member_sum=array_shift ($member_array);
 
         $this->assign([
             'username'  =>  $this->username,
-            'member_array'=>$member_array
+            'member_array'=>$member_array,
+            'member_sum'=>$member_sum['total_count']
+
         ]);
 
         return $this->fetch('adminpage/member_list');
 
     }
 
-    public function  get_member(){
+    public function  get_member( $page){
 
         $this->init();
-        $url='http://119.23.44.138:10001/admin/get_user';
+        $url='http://119.23.44.138:10001/admin/get_user?page'. $page;
 
 
         $cookies='beegosessionID='.$this->cookies.'; Path=/; HttpOnly';

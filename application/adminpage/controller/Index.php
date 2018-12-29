@@ -19,7 +19,11 @@ class Index extends  Controller
     }
     public function index()
     {
+        if (!Session::has('loginname')){
 
+            $this->error('未登录','adminpage/Login/login');
+
+        }
           $this->init();
         $this->assign([
             'username'  =>  $this->username,
@@ -32,6 +36,12 @@ class Index extends  Controller
     }
     //得到所有商品
     public  function  post($page){
+        if (!Session::has('loginname')){
+
+            $this->error('未登录','adminpage/Login/login');
+
+        }
+
         //通过ajax 更改状态
         if(request()->isAjax()){
 
@@ -45,10 +55,9 @@ class Index extends  Controller
                 return $status;
             }
 
-
-
-
         }
+
+
         $page=(int)$page;
         $page=$page-1;
 
@@ -148,6 +157,11 @@ class Index extends  Controller
 
 
     public  function  comment($page){
+        if (!Session::has('loginname')){
+
+            $this->error('未登录','adminpage/Login/login');
+
+        }
         //使用ajax请求删除评论
         if(request()->isAjax()){
 
@@ -221,7 +235,7 @@ class Index extends  Controller
 
     public  function  get_comment($page){
         $this->init();
-        $url='http://119.23.44.138:10001/comment/admin/get?page'.$page;
+        $url='http://119.23.44.138:10001/comment/admin/get?page='.$page;
 
 
         $cookies='beegosessionID='.$this->cookies.'; Path=/; HttpOnly';
@@ -250,6 +264,11 @@ class Index extends  Controller
     }
 
     public  function  add_commodity(){
+        if (!Session::has('loginname')){
+
+            $this->error('未登录','adminpage/Login/login');
+
+        }
         //使用ajax添加商品
         if(request()->isAjax()){
 
