@@ -22,5 +22,12 @@ return [
         'model'      => ['User'],
         'view'       => ['adminpage/adminpage'],
     ],
+    'homepage'     => [
+        '__file__'   => ['common.php'],
+        '__dir__'    => ['behavior', 'controller', 'model', 'view'],
+        'controller' => ['Login'],
+        'model'      => ['User'],
+        'view'       => ['homepage/homepage'],
+    ],
     // 其他更多的模块定义
 ];
