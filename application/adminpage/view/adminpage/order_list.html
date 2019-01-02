@@ -175,7 +175,12 @@
 
 
               <tr>
-                <td><input name='aa-checkbox' type="checkbox"  value="{$vo.order_id}+{$vo.user['user_id']}"/></td>
+                  {if condition="$vo.status == 0"}<td></td>
+
+                  {else /} <td><input name='aa-checkbox' type="checkbox"  value="{$vo.order_id}+{$vo.user['user_id']}"/></td>
+                  {/if}
+
+
                 
                 <td> {$vo.order_id}</td>
                 <td>
@@ -184,9 +189,11 @@
                 </td>
                 <td>{$vo.count}</td>
                 <td >
+                    <!--0用户未下单，2用户下单，1商家发货-->
                     {switch $vo.status}
                     {case value='1'}<i name="icon{$vo.order_id}" class="am-icon-check am-text-warning"></i>{/case}
-                    {case value='0'}<i name="icon{$vo.order_id}" class="am-icon-close am-text-primary"></i>{/case}
+                    {case value='0'}<i name="icon{$vo.order_id}" >用户未下单</i>{/case}
+                    {case value='2'}<i name="icon{$vo.order_id}" class="am-icon-close am-text-primary"></i>{/case}
                     {default /}default
                     {/switch}
 
@@ -215,7 +222,8 @@
                       <a  title="详细订单" id="a-{$vo.order_id}" type="button" data-am-modal="{target: '#my-popup'}" name="opbtn" class="am-btn am-btn-default am-btn-xs am-text-success am-round"><span class="am-icon-search"></span> </a>
                         {switch $vo.status}
                         {case value='1'} <a class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"   id="b-{$vo.order_id}" name="opbtn" title="已发货">已发货</a>{/case}
-                        {case value='0'} <a class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"  id="b-{$vo.order_id}" name="opbtn" title="确认发货">发货</a>{/case}
+                        {case value='2'} <a class="am-btn am-btn-default am-btn-xs am-text-secondary am-round"  id="b-{$vo.order_id}" name="opbtn" title="确认发货">发货</a>{/case}
+                        {case value='0'} <a class="am-btn  am-btn-xs am-text-secondary am-round"  id="b-{$vo.order_id}" name="opbtn" title="确认发货">   </a>{/case}
                         {default /}default
                         {/switch}
                     </div>
